@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_surf/pages/home_page.dart';
 import 'package:movie_surf/pages/main_page.dart';
 
 void main() async{
