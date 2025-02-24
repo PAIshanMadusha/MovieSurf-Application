@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movie_surf/pages/home_page.dart';
 
-void main(){
+void main() async{
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "MovieSurf",
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
+      home: HomePage(),
     );
   }
 }
