@@ -1,0 +1,34 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movie_surf/models/movie_model.dart';
+import 'package:http/http.dart' as http;
+
+class MovieService {
+  //Get API Key From .env
+  final String _apiKey = dotenv.env["MY_MOVIE_API_KEY"] ?? "";
+  final String _baseUrl = "https://api.themoviedb.org/3/movie/upcoming";
+
+  //Fetch All Upcoming Movies
+  Future<List<MovieModel>> fetchUpcomingMovies({int page = 1}) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$_baseUrl?api_key=$_apiKey&page=$page"),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((movieData) => MovieModel.formJson(movieData))
+            .toList();
+      }else{
+        throw Exception("Faild to Load Data!");
+      }
+    } catch (error) {
+      debugPrint("Error Fetcting Upcoming Movies: $error");
+      return [];
+    }
+  }
+}
