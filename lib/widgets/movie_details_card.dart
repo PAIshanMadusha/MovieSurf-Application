@@ -17,8 +17,9 @@ class MovieDetailsCard extends StatelessWidget {
         gradient: AppColors.kMovieCardColor,
         boxShadow: [
           BoxShadow(
-            color: AppColors.kBlueColor,
-            blurRadius: 3,
+            // ignore: deprecated_member_use
+            color: AppColors.kBlueColor.withOpacity(0.2),
+            blurRadius: 2,
             spreadRadius: 1,
           ),
         ],

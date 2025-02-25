@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<MovieModel> _movies = [];
+  final List<MovieModel> _movies = [];
   int _currentPage = 1;
   bool _isLoading = false;
   bool _hasMore = true;

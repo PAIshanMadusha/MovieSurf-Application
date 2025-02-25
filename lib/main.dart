@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_surf/pages/main_page.dart';
 
-void main() async{
+void main() async {
   await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,
         brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
       ),
       home: MainPage(),
     );

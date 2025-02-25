@@ -6,6 +6,7 @@ class AppColors {
   static const Color kWhiteColor = Colors.white;
   static const Color kRedColor = Colors.red;
   static const Color kGreenColor = Colors.green;
+  static const Color kBlackColor = Colors.black;
 
   static const Color kMovieCardColor1 = Color(0xff1A120B);
   static const Color kMovieCardColor2 = Color(0xff03001C);

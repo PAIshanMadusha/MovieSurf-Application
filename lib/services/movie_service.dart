@@ -8,13 +8,35 @@ import 'package:http/http.dart' as http;
 class MovieService {
   //Get API Key From .env
   final String _apiKey = dotenv.env["MY_MOVIE_API_KEY"] ?? "";
-  final String _baseUrl = "https://api.themoviedb.org/3/movie/upcoming";
+  final String _baseUrl = "https://api.themoviedb.org/3/movie";
 
   //Fetch All Upcoming Movies
   Future<List<MovieModel>> fetchUpcomingMovies({int page = 1}) async {
     try {
       final response = await http.get(
-        Uri.parse("$_baseUrl?api_key=$_apiKey&page=$page"),
+        Uri.parse("$_baseUrl/upcoming?api_key=$_apiKey&page=$page"),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((movieData) => MovieModel.formJson(movieData))
+            .toList();
+      } else {
+        throw Exception("Faild to Load Data!");
+      }
+    } catch (error) {
+      debugPrint("Error Fetcting Upcoming Movies: $error");
+      return [];
+    }
+  }
+
+  //Fetch All NowPlaying Movies
+  Future<List<MovieModel>> fetchNowPlayingMovies({int page = 1}) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$_baseUrl/now_playing?api_key=$_apiKey&page=$page"),
       );
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -27,7 +49,7 @@ class MovieService {
         throw Exception("Faild to Load Data!");
       }
     } catch (error) {
-      debugPrint("Error Fetcting Upcoming Movies: $error");
+      debugPrint("Error Fetching NowPlaying Movies: $error");
       return [];
     }
   }
