@@ -28,14 +28,16 @@ class MovieDetailsCard extends StatelessWidget {
         padding: EdgeInsets.all(AppConstance.kPaddingValue),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
+            movie.posterPath == null
+                ? SizedBox()
+                : ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
             SizedBox(height: AppConstance.kSizedBoxValue),
             Text(
               movie.title,

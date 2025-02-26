@@ -45,12 +45,36 @@ class MovieService {
         return results
             .map((movieData) => MovieModel.formJson(movieData))
             .toList();
-      }else{
+      } else {
         throw Exception("Faild to Load Data!");
       }
     } catch (error) {
       debugPrint("Error Fetching NowPlaying Movies: $error");
       return [];
+    }
+  }
+
+  //Search Movie by Name
+  final String _searchBaseUrl = "https://api.themoviedb.org/3/search/movie";
+
+  Future<List<MovieModel>> searchMovies(String query) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$_searchBaseUrl?query=$query&api_key=$_apiKey"),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((movieData) => MovieModel.formJson(movieData))
+            .toList();
+      }else{
+        throw Exception("Error Searching Movies!");
+      }
+    } catch (error) {
+      debugPrint("Error Searching Movies: $error");
+      throw Exception("Faild to Search Movie: $error");
     }
   }
 }
