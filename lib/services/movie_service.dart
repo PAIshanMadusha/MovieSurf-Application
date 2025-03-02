@@ -69,12 +69,89 @@ class MovieService {
         return results
             .map((movieData) => MovieModel.formJson(movieData))
             .toList();
-      }else{
+      } else {
         throw Exception("Error Searching Movies!");
       }
     } catch (error) {
       debugPrint("Error Searching Movies: $error");
       throw Exception("Faild to Search Movie: $error");
+    }
+  }
+
+  //Similar Movies
+  Future<List<MovieModel>> fetchSimilarMovies(int movieId) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/movie/$movieId/similar?api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((movieData) => MovieModel.formJson(movieData))
+            .toList();
+      } else {
+        throw Exception("Error with Similar Movies");
+      }
+    } catch (error) {
+      debugPrint("Faild to Fetch Similar Movies: $error");
+      return [];
+    }
+  }
+
+  //Recommended Movies
+  Future<List<MovieModel>> fetchRecommendedMovies(int movieId) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/movie/$movieId/recommendations?api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((movieData) => MovieModel.formJson(movieData))
+            .toList();
+      } else {
+        throw Exception("Error with Recommended Movies");
+      }
+    } catch (error) {
+      debugPrint("Faild to Fetch Recommended Movies: $error");
+      return [];
+    }
+  }
+
+  //Fetch Images by MovieId
+  Future<List<String>> fetchImagesFromMovieId(int movieId) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/movie/$movieId/images?api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> backdrops = data["backdrops"];
+
+        //return the First 10 images
+        return backdrops
+            .take(10)
+            .map(
+              (imageData) =>
+                  "https://image.tmdb.org/t/p/w500${imageData["file_path"]}",
+            )
+            .toList();
+      }else{
+        throw Exception("Error Fetching Images");
+      }
+    } catch (error) {
+      debugPrint("Error Fetching Images: $error");
+      return [];
     }
   }
 }
