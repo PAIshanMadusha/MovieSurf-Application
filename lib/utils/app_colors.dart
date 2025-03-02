@@ -17,8 +17,8 @@ class AppColors {
     end: Alignment.centerRight,
   );
 
-  static const Color kTvShowCardColor1 = Color.fromARGB(255, 41, 28, 17);
-  static const Color kTvShowCardColor2 = Color.fromARGB(255, 6, 0, 58);
+  static const Color kTvShowCardColor1 = Color.fromARGB(255, 41, 41, 1);
+  static const Color kTvShowCardColor2 = Color.fromARGB(255, 0, 32, 16);
 
   static const Gradient kTvShowCardColor = LinearGradient(
     colors: [kTvShowCardColor1, kTvShowCardColor2],

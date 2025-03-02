@@ -30,7 +30,7 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
           .fetchNowPlayingMovies(page: _currentPage);
       setState(() {
         _movies = fetchedMovies;
-        _totalPages = 20;
+        _totalPages = 200;
       });
     } catch (error) {
       debugPrint("Error: $error");
