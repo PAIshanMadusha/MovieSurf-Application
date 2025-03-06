@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_surf/models/movie_model.dart';
+import 'package:movie_surf/pages/single_movie_details_page.dart';
 import 'package:movie_surf/services/movie_service.dart';
 import 'package:movie_surf/utils/app_colors.dart';
 import 'package:movie_surf/utils/app_constance.dart';
@@ -96,7 +97,20 @@ class _NowPlayingPageState extends State<NowPlayingPage> {
                         if (index > _movies.length - 1) {
                           return _buildPaginationControlles();
                         } else {
-                          return MovieDetailsCard(movie: _movies[index]);
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => SingleMovieDetailsPage(
+                                        movie: _movies[index],
+                                      ),
+                                ),
+                              );
+                            },
+                            child: MovieDetailsCard(movie: _movies[index]),
+                          );
                         }
                       },
                     ),

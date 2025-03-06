@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_surf/models/movie_model.dart';
+import 'package:movie_surf/pages/single_movie_details_page.dart';
 import 'package:movie_surf/services/movie_service.dart';
 import 'package:movie_surf/utils/app_colors.dart';
 import 'package:movie_surf/utils/app_constance.dart';
@@ -133,7 +134,20 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      MovieDetailsCard(movie: _searchResults[index]),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => SingleMovieDetailsPage(
+                                    movie: _searchResults[index],
+                                  ),
+                            ),
+                          );
+                        },
+                        child: MovieDetailsCard(movie: _searchResults[index]),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(
                           left: AppConstance.kPaddingValue,

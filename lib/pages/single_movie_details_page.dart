@@ -6,6 +6,7 @@ import 'package:movie_surf/utils/app_constance.dart';
 import 'package:movie_surf/utils/app_text_style.dart';
 import 'package:movie_surf/widgets/movie_details_card.dart';
 
+// ignore: must_be_immutable
 class SingleMovieDetailsPage extends StatefulWidget {
   MovieModel movie;
   SingleMovieDetailsPage({super.key, required this.movie});
