@@ -140,7 +140,7 @@ class MovieService {
 
         //return the First 10 images
         return backdrops
-            .take(10)
+            .take(20)
             .map(
               (imageData) =>
                   "https://image.tmdb.org/t/p/w500${imageData["file_path"]}",

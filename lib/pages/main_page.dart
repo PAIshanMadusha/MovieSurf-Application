@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_surf/pages/home_page.dart';
 import 'package:movie_surf/pages/now_playing_page.dart';
-import 'package:movie_surf/pages/search_movies_page.dart';
+import 'package:movie_surf/pages/search_movies_tvshows_page.dart';
 import 'package:movie_surf/pages/tv_shows_page.dart';
 import 'package:movie_surf/utils/app_colors.dart';
 
@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const NowPlayingPage(),
     const TvShowsPage(),
-    const SearchMoviesPage(),
+    const SearchMoviesTvshowsPage(),
   ];
 
   @override

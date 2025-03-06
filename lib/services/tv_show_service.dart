@@ -43,7 +43,7 @@ class TvShowService {
         List<TvShowModel> tvShows = [];
 
         tvShows.addAll(
-          popularResult.map((tvData) => TvShowModel.formJson(tvData)).take(100),
+          popularResult.map((tvData) => TvShowModel.formJson(tvData)).take(200),
         );
 
         tvShows.addAll(
@@ -68,6 +68,30 @@ class TvShowService {
     }
   }
 
+  //Search Tv Shows by Name
+  Future<List<TvShowModel>> searchTvShow(String query) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/search/tv?query=$query&api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((tvShowData) => TvShowModel.formJson(tvShowData))
+            .toList();
+      }else{
+        throw Exception("Error Searching TvShows!");
+      }
+    } catch (error) {
+      debugPrint("Error Searching TvShows: $error");
+      return searchTvShow(query);
+    }
+  }
+
   //Fetch Images by TvShow Id
   Future<List<String>> fetchImagesFromTvShowId(int tvShowId) async {
     try {
@@ -82,7 +106,7 @@ class TvShowService {
 
         //Return the First 10 Images
         return backdrops
-            .take(10)
+            .take(20)
             .map(
               (imageData) =>
                   "https://image.tmdb.org/t/p/w500${imageData["file_path"]}",
@@ -136,7 +160,7 @@ class TvShowService {
         return results
             .map((tvShowData) => TvShowModel.formJson(tvShowData))
             .toList();
-      }else{
+      } else {
         throw Exception("Error with Recommended TvShows");
       }
     } catch (error) {
