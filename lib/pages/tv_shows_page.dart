@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_surf/models/tv_show_model.dart';
+import 'package:movie_surf/pages/single_tvshow_details_page.dart';
 import 'package:movie_surf/services/tv_show_service.dart';
 import 'package:movie_surf/utils/app_colors.dart';
 import 'package:movie_surf/utils/app_text_style.dart';
@@ -63,7 +64,20 @@ class _TvShowsPageState extends State<TvShowsPage> {
               : ListView.builder(
                 itemCount: _tvShows.length,
                 itemBuilder: (context, index) {
-                  return TvShowDetailsCard(tvShow: _tvShows[index]);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => SingleTvshowDetailsPage(
+                                tvShow: _tvShows[index],
+                              ),
+                        ),
+                      );
+                    },
+                    child: TvShowDetailsCard(tvShow: _tvShows[index]),
+                  );
                 },
               ),
     );

@@ -43,17 +43,19 @@ class TvShowService {
         List<TvShowModel> tvShows = [];
 
         tvShows.addAll(
-          popularResult.map((tvData) => TvShowModel.formJson(tvData)).take(20),
+          popularResult.map((tvData) => TvShowModel.formJson(tvData)).take(100),
         );
 
         tvShows.addAll(
           airingTodayResult
               .map((tvData) => TvShowModel.formJson(tvData))
-              .take(20),
+              .take(100),
         );
 
         tvShows.addAll(
-          topRatedResult.map((tvData) => TvShowModel.formJson(tvData)).take(20),
+          topRatedResult
+              .map((tvData) => TvShowModel.formJson(tvData))
+              .take(100),
         );
 
         return tvShows;
@@ -63,6 +65,83 @@ class TvShowService {
     } catch (error) {
       debugPrint("Error Fetching Tv Shows: $error");
       return fetchTvShows();
+    }
+  }
+
+  //Fetch Images by TvShow Id
+  Future<List<String>> fetchImagesFromTvShowId(int tvShowId) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/tv/$tvShowId/images?api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final List<dynamic> backdrops = data["backdrops"];
+
+        //Return the First 10 Images
+        return backdrops
+            .take(10)
+            .map(
+              (imageData) =>
+                  "https://image.tmdb.org/t/p/w500${imageData["file_path"]}",
+            )
+            .toList();
+      } else {
+        throw Exception("Error Fetching Images");
+      }
+    } catch (error) {
+      debugPrint("Error Fetching Images: $error");
+      return fetchImagesFromTvShowId(tvShowId);
+    }
+  }
+
+  //Fetch Similar TvShows
+  Future<List<TvShowModel>> fetchSimilarTvShows(int tvShowId) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/tv/$tvShowId/similar?api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((tvShowData) => TvShowModel.formJson(tvShowData))
+            .toList();
+      } else {
+        throw Exception("Error with Similar TvShows");
+      }
+    } catch (error) {
+      debugPrint("Faild to Fetch Similar TvShows: $error");
+      return fetchSimilarTvShows(tvShowId);
+    }
+  }
+
+  //Fetch Recomended TvShows
+  Future<List<TvShowModel>> fetchRecommendedTvShows(int tvShowId) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          "https://api.themoviedb.org/3/tv/$tvShowId/recommendations?api_key=$_apiKey",
+        ),
+      );
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final List<dynamic> results = data["results"];
+
+        return results
+            .map((tvShowData) => TvShowModel.formJson(tvShowData))
+            .toList();
+      }else{
+        throw Exception("Error with Recommended TvShows");
+      }
+    } catch (error) {
+      debugPrint("Faild to Fetch Recommended TvShows: $error");
+      return fetchRecommendedTvShows(tvShowId);
     }
   }
 }
