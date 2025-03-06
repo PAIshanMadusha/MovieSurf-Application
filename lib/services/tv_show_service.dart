@@ -62,7 +62,7 @@ class TvShowService {
       }
     } catch (error) {
       debugPrint("Error Fetching Tv Shows: $error");
-      return [];
+      return fetchTvShows();
     }
   }
 }

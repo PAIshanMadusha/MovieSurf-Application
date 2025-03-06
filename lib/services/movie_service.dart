@@ -28,7 +28,7 @@ class MovieService {
       }
     } catch (error) {
       debugPrint("Error Fetcting Upcoming Movies: $error");
-      return [];
+      return fetchUpcomingMovies();
     }
   }
 
@@ -50,7 +50,7 @@ class MovieService {
       }
     } catch (error) {
       debugPrint("Error Fetching NowPlaying Movies: $error");
-      return [];
+      return fetchNowPlayingMovies();
     }
   }
 
@@ -74,7 +74,7 @@ class MovieService {
       }
     } catch (error) {
       debugPrint("Error Searching Movies: $error");
-      throw Exception("Faild to Search Movie: $error");
+      return searchMovies(query);
     }
   }
 
@@ -98,7 +98,7 @@ class MovieService {
       }
     } catch (error) {
       debugPrint("Faild to Fetch Similar Movies: $error");
-      return [];
+      return fetchSimilarMovies(movieId);
     }
   }
 
@@ -122,7 +122,7 @@ class MovieService {
       }
     } catch (error) {
       debugPrint("Faild to Fetch Recommended Movies: $error");
-      return [];
+      return fetchRecommendedMovies(movieId);
     }
   }
 
@@ -151,7 +151,7 @@ class MovieService {
       }
     } catch (error) {
       debugPrint("Error Fetching Images: $error");
-      return [];
+      return fetchImagesFromMovieId(movieId);
     }
   }
 }
