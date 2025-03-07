@@ -4,7 +4,6 @@ import 'package:movie_surf/models/movie_model.dart';
 import 'package:movie_surf/pages/single_movie_details_page.dart';
 import 'package:movie_surf/services/movie_service.dart';
 import 'package:movie_surf/utils/app_colors.dart';
-import 'package:movie_surf/utils/app_constance.dart';
 import 'package:movie_surf/utils/app_text_style.dart';
 import 'package:movie_surf/widgets/movie_details_card.dart';
 
