@@ -4,6 +4,7 @@ import 'package:movie_surf/pages/home_page.dart';
 import 'package:movie_surf/pages/now_playing_page.dart';
 import 'package:movie_surf/pages/search_movies_tvshows_page.dart';
 import 'package:movie_surf/pages/tv_shows_page.dart';
+import 'package:movie_surf/pages/user_profile_page.dart';
 import 'package:movie_surf/utils/app_colors.dart';
 
 class MainPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _MainPageState extends State<MainPage> {
     const NowPlayingPage(),
     const TvShowsPage(),
     const SearchMoviesTvshowsPage(),
+    const UserProfilePage(),
   ];
 
   @override
@@ -89,6 +91,20 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             label: "Search",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/userprofile.svg",
+              width: 28,
+              height: 28,
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 4
+                    ? AppColors.kBlueColor
+                    : AppColors.kGeryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "Profile",
           ),
         ],
         selectedItemColor: AppColors.kBlueColor,

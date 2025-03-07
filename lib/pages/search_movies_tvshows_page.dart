@@ -19,6 +19,7 @@ class _SearchMoviesTvshowsPageState extends State<SearchMoviesTvshowsPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: true,
           title: Text(
             "Search Movies or Tv Shows",
             style: AppTextStyle.kMainTitle.copyWith(

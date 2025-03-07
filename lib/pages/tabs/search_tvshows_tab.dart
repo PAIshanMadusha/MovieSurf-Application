@@ -108,7 +108,7 @@ class _SearchTvshowsTabState extends State<SearchTvshowsTab> {
         else if (_searchResult.isEmpty)
           Center(
             child: Text(
-              "No TvShow Found!, Please Search Here...",
+              "No TvShows Found!, Please Search Here...",
               style: AppTextStyle.kBodyText.copyWith(
                 color: AppColors.kGreenColor,
               ),

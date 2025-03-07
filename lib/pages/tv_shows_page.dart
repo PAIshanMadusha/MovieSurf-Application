@@ -45,6 +45,7 @@ class _TvShowsPageState extends State<TvShowsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         title: Text(
           "Tv Shows",
           style: AppTextStyle.kMainTitle.copyWith(

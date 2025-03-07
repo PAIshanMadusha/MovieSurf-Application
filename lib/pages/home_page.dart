@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movie_surf/models/movie_model.dart';
 import 'package:movie_surf/pages/single_movie_details_page.dart';
 import 'package:movie_surf/services/movie_service.dart';
@@ -61,17 +62,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("MovieSurf", style: AppTextStyle.kMainTitle),
-            SizedBox(width: AppConstance.kSizedBoxValue - 4),
-            Image.asset(
-              "assets/videocamera.png",
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
+            Text(
+              "MovieSurf",
+              style: AppTextStyle.kMainTitle.copyWith(
+                color: AppColors.kBlueColor,
+              ),
+            ),
+            SizedBox(width: 5),
+            Lottie.asset(
+              "assets/animations/Animation2.json",
+              width: 70,
+              height: 70,
+              fit: BoxFit.contain,
             ),
           ],
         ),
