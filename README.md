@@ -110,12 +110,7 @@ https://image.tmdb.org/t/p/w500/[ImageName]
    https://github.com/PAIshanMadusha/MovieSurf-Application.git
    ```
    
-2. Install Dependencies: 
-   ```bash
-   flutter pub get
-   ```
-   
-3. Setting Up the TMDb API Key:
+2. Setting Up the TMDb API Key:
 
 - **Obtain an API key** from [TMDb](https://developer.themoviedb.org/).  
 - **Create a `.env` file** in the root of project.
@@ -126,7 +121,12 @@ https://image.tmdb.org/t/p/w500/[ImageName]
    ```
 - Replace `[Your-API-Key]` with your actual API key from TMDb.
 
-5. Run the App:
+3. Install Dependencies: 
+   ```bash
+   flutter pub get
+   ```
+
+4. Run the App:
 
    ```bash
    flutter run
